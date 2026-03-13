@@ -29,9 +29,7 @@ If the teacher asks "How does the app start and run?", here is the step-by-step:
 
 ---
 
-## 4. The "Lab Cheat Sheet" (Variables to Change)
-
-If your teacher asks you to change the behavior on the fly, look here:
+## 4. VARs
 
 ### In `Constants.h`:
 *   `CHAIN_LEN`: Change this to add or remove windows (e.g., set to `10` for a long snake).
@@ -41,24 +39,6 @@ If your teacher asks you to change the behavior on the fly, look here:
 
 ### In `App.cpp` (Inside `Initialize` and `UpdateFollowers`):
 *   `shrinkAmount`: Change this (currently `30`) to make the followers get smaller faster or slower. Set to `0` to make them all the same size.
-
----
-
-## 5. Core WinAPI Concepts (For Theory Questions)
-
-### Q: What is `WndProc`?
-**A:** It is the "Brain" of the window. Every time something happens (mouse move, paint, close), Windows calls this function. We use `SetWindowLongPtr` to attach our C++ `Window` object to the WinAPI `HWND` so the `WndProc` knows which object to talk to.
-
-### Q: How does the "Glide" work?
-**A:** We use **Lerp (Linear Interpolation)**. 
-Formula: `CurrentPosition += (TargetPosition - CurrentPosition) * Alpha`.
-It moves a percentage of the remaining distance every frame, which naturally slows down as it gets closer, creating that smooth "elastic" feel.
-
-### Q: Why is the Leader at the bottom?
-**A:** Because we set the **Ownership chain**. In WinAPI, an "Owned" window is always drawn on top of its "Owner."
-*   Follower 1 is the Owner of the Leader.
-*   Follower 2 is the Owner of Follower 1.
-This forces the Leader to the absolute bottom of the stack.
-
 ### Q: What is `WM_NCCREATE`?
 **A:** It's one of the very first messages a window gets. We use it to "hand over" the `this` pointer from our C++ class to the WinAPI window handle so they are linked from the very start.
+
